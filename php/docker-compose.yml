@@ -1,0 +1,19 @@
+version: '3'
+services:
+  test-php-app:
+    image: ambientum/php:8.0-nginx
+    volumes:
+      - ./:/var/www/app
+    ports:
+      - "8050:8080"
+    depends_on:
+      - test-php-db
+  test-php-db:
+    image: mysql
+    volumes:
+      - ./db_data:/var/lib/mysql
+    ports:
+      - "3320:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
